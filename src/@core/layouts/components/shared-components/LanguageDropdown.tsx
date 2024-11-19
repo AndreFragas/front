@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
-import {useUsuarioModuleApi} from 'src/#albionboard/usuario/api';
+import {useUsuarioModuleApi} from 'src/#logiquiz/usuario/api';
 import Icon from 'src/@core/components/icon';
 import OptionsMenu from 'src/@core/components/option-menu';
 import {Settings} from 'src/@core/context/settingsContext';

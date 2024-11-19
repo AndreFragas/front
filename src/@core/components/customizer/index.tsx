@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import {styled} from '@mui/material/styles';
 import {useState} from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import {useUsuarioModuleApi} from 'src/#albionboard/usuario/api';
+import {useUsuarioModuleApi} from 'src/#logiquiz/usuario/api';
 import Icon from 'src/@core/components/icon';
 import {Settings} from 'src/@core/context/settingsContext';
 import {useSettings} from 'src/@core/hooks/useSettings';

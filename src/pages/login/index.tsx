@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import {LoginComponent} from 'src/#albionboard/login';
+import {LoginComponent} from 'src/#logiquiz/login';
 import BlankLayout from 'src/@core/layouts/BlankLayout';
 
 const Login = () => {

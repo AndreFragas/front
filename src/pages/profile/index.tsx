@@ -1,4 +1,4 @@
-import {PerfilScreen} from 'src/#albionboard/perfil/screen';
+import {PerfilScreen} from 'src/#logiquiz/perfil/screen';
 
 const Perfil = () => {
   return <PerfilScreen />;

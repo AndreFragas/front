@@ -1,5 +1,5 @@
 import {Ability, AbilityBuilder} from '@casl/ability';
-import {IPermissaoLogin} from 'src/#albionboard/acessos/types';
+import {IPermissaoLogin} from 'src/#logiquiz/acessos/types';
 import {getLocalStorage} from 'src/@prismafive/storage-controler';
 import {PartnerMenuItems} from 'src/context/types';
 

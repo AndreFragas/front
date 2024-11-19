@@ -1,4 +1,4 @@
-import {AcessosScreen} from 'src/#albionboard/acessos/screen';
+import {AcessosScreen} from 'src/#logiquiz/acessos/screen';
 
 const AcessosScreenConfig = () => {
   return <AcessosScreen />;

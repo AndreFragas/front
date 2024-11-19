@@ -12,7 +12,7 @@ import {
   useGridApiRef,
 } from '@mui/x-data-grid-pro';
 import {useEffect, useState} from 'react';
-import {useUsuarioModuleApi} from 'src/#albionboard/usuario/api';
+import {useUsuarioModuleApi} from 'src/#logiquiz/usuario/api';
 import {useStateWithHistory} from 'src/@prismafive/hooks/use-state-with-history';
 import {useTranslate} from 'src/@prismafive/hooks/use-translate';
 import {useWindowDimensions} from 'src/@prismafive/hooks/use-window-dimensions';

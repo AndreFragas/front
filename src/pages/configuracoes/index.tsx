@@ -1,4 +1,4 @@
-import {ModuloScreen} from 'src/#albionboard/modulos';
+import {ModuloScreen} from 'src/#logiquiz/modulos';
 
 const Configuracoes = () => {
   return <ModuloScreen />;

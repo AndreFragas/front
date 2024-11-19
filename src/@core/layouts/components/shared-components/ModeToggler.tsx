@@ -1,5 +1,5 @@
 import IconButton from '@mui/material/IconButton';
-import {useUsuarioModuleApi} from 'src/#albionboard/usuario/api';
+import {useUsuarioModuleApi} from 'src/#logiquiz/usuario/api';
 import Icon from 'src/@core/components/icon';
 import {Settings} from 'src/@core/context/settingsContext';
 import {Mode} from 'src/@core/layouts/types';

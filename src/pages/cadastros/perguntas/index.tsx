@@ -1,11 +1,7 @@
-import {usePerguntasTableConfig} from 'src/#logiquiz/perguntas/config';
-import {ListPaginationCard} from 'src/@prismafive/components/cards/list-pagination-card';
+import {PerguntasListScreen} from 'src/#logiquiz/perguntas';
 
 const Perguntas = () => {
-  const config = usePerguntasTableConfig();
-  return (
-    <ListPaginationCard title="Perguntas" tableConfig={config.generateConfig()} route="/api/perguntas/paginationList" />
-  );
+  return <PerguntasListScreen />;
 };
 
 Perguntas.acl = {

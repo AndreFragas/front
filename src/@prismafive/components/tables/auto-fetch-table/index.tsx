@@ -38,7 +38,12 @@ export function AutoFetchTable(props: AutoFetchTableProps) {
   const [pagination, setPagination] = useStateWithHistory({
     page: context.getValue(contextPage) ?? 1,
     pagesize: context.getValue(contextPageSize) ?? pageSize,
-    asc: user_config.sortModel && user_config.sortModel.length !== 0 ? user_config.sortModel[0].sort : 'DESC',
+    asc:
+      user_config.sortModel && user_config.sortModel.length !== 0
+        ? user_config.sortModel[0].sort
+        : props.defaultAsc
+        ? 'ASC'
+        : 'DESC',
     sortBy: user_config.sortModel && user_config.sortModel.length !== 0 ? user_config.sortModel[0].field : '',
     search: context.getValue(contextKey) ?? '',
   } as IPagination);
@@ -57,6 +62,10 @@ export function AutoFetchTable(props: AutoFetchTableProps) {
       if (newPagination.asc) newPagination.asc = newPagination.asc.toUpperCase();
       if (newPagination.search === '' || ignoreSearch) delete newPagination.search;
       if (newPagination.sortBy === '') delete newPagination.sortBy;
+
+      console.log(props.route)
+      console.log(extraParams)
+      console.log(newPagination)
 
       const response = await getData.fetch({
         dynamicRoute: `${props.route}`,

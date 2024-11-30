@@ -15,7 +15,7 @@ interface Props {
 }
 
 const ThemeComponent = (props: Props) => {
-  const companyColor: string = '#FF0000';
+  const companyColor: string = '#2196f3';
   const {settings, children} = props;
 
   let theme = createTheme(themeOptions(settings, 'light', companyColor));

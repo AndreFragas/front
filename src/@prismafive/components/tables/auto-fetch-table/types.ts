@@ -19,6 +19,7 @@ export interface AutoFetchTableProps {
   renderOpositeToSpeedDial?: () => ReactElement;
   ignoreSearch?: boolean;
   setIgnoreSearch?: Dispatch<SetStateAction<boolean>>;
+  defaultAsc?: boolean;
 }
 
 export interface IPagination {

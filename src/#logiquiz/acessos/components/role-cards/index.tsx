@@ -32,7 +32,7 @@ import {isEmpty} from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
 import {useEffect, useState} from 'react';
-import NewGroupShort from 'src/@prismafive/assets/png/personagem-albion.png';
+import NewGroupShort from 'src/@prismafive/assets/png/new-group-short.png';
 import {CloseButton} from 'src/@prismafive/components/buttons/close-button';
 import {TextField} from 'src/@prismafive/components/form-fields/text-field';
 import {useConfirmModal} from 'src/@prismafive/components/modals/confirm-modal';

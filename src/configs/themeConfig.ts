@@ -39,7 +39,7 @@ type ThemeConfig = {
 };
 
 const themeConfig: ThemeConfig = {
-  templateName: 'Logiquiz' /* App Name */,
+  templateName: 'LogiQuiz' /* App Name */,
   intranet: 'Intranet',
   layout: 'vertical' /* vertical | horizontal */,
   mode: 'light' as Mode /* light | dark | semi-dark /*! Note: semi-dark value will only work for Vertical Layout */,

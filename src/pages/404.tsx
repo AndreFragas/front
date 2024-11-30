@@ -5,7 +5,7 @@ import {styled} from '@mui/material/styles';
 import Link from 'next/link';
 import {ReactNode} from 'react';
 import BlankLayout from 'src/@core/layouts/BlankLayout';
-import Image404 from 'src/@prismafive/assets/png/esqueleto-albion.png';
+import Image404 from 'src/@prismafive/assets/png/404-2.png';
 import {useTranslate} from 'src/@prismafive/hooks/use-translate';
 
 const BoxWrapper = styled(Box)<BoxProps>(({theme}) => ({

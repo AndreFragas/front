@@ -1,6 +1,6 @@
-import ffwebBanner from '#assets/png/Albion_Online_Logo.png';
-import loginBackgroundLogo from '#assets/png/login-background.png';
-import loginLogo from '#assets/png/boi-albion.png';
+import ffwebBanner from '#assets/png/Logiquiz-Logo.png';
+import loginBackgroundLogo from '#assets/png/login-background2.png';
+import loginLogo from '#assets/png/pngwing.com_6.png';
 import {yupResolver} from '@hookform/resolvers/yup';
 import Box, {BoxProps} from '@mui/material/Box';
 import Button from '@mui/material/Button';

@@ -73,6 +73,7 @@ export function ListPaginationCard(props: ListPaginationCardProps) {
           hideSearch={props.hideSearch}
           ignoreSearch={props.ignoreSearch}
           setIgnoreSearch={props.setIgnoreSearch}
+          defaultAsc={props.defaultAsc}
         />
       </CardContent>
     </Card>

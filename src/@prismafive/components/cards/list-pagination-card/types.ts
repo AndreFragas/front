@@ -20,4 +20,5 @@ export interface ListPaginationCardProps {
   hideSearch?: boolean;
   ignoreSearch?: boolean;
   setIgnoreSearch?: Dispatch<SetStateAction<boolean>>;
+  defaultAsc?: boolean;
 }

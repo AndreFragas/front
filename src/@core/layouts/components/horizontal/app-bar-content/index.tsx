@@ -4,7 +4,7 @@ import {styled} from '@mui/material/styles';
 import Image from 'next/image';
 import Link from 'next/link';
 import {LayoutProps} from 'src/@core/layouts/types';
-import logo from 'public/images/icone-albion.png';
+import logo from 'public/images/icone-logiquiz.png';
 import {getLocalStorage} from 'src/@prismafive/storage-controler';
 import themeConfig from 'src/configs/themeConfig';
 
@@ -45,7 +45,7 @@ const AppBarContent = (props: Props) => {
       ) : (
         <LinkStyled href="/home">
           <Image src={companyLogo} alt="" width={34} height={34} />
-          <Typography variant="h4" sx={{ml: 2.5, fontWeight: 700, lineHeight: '24px'}}>
+          <Typography variant="h4" sx={{ml: 2.5, fontWeight: 700, lineHeight: '24px', color: '#2196f3'}}>
             {isIntranet ? themeConfig.intranet : themeConfig.templateName}
           </Typography>
         </LinkStyled>

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Icon from 'src/@core/components/icon';
 import {LayoutProps} from 'src/@core/layouts/types';
-import logo from 'public/images/icone-albion.png';
+import logo from 'public/images/icone-logiquiz.png';
 import {getLocalStorage} from 'src/@prismafive/storage-controler';
 import themeConfig from 'src/configs/themeConfig';
 
@@ -95,6 +95,7 @@ const VerticalNavHeader = (props: Props) => {
               ...menuCollapsedStyles,
               ...(navCollapsed && !navHover ? {} : {ml: 2.5}),
               whiteSpace: 'nowrap',
+              color: '#2196f3'
             }}
           >
             {isIntranet ? themeConfig.intranet : themeConfig.templateName}

@@ -1,7 +1,7 @@
 import Box, {BoxProps} from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Image from 'next/image';
-import logo from 'public/images/icone-albion.png';
+import logo from 'public/images/icone-logiquiz.png';
 
 const FallbackSpinner = ({sx}: {sx?: BoxProps['sx']}) => {
   return (

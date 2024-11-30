@@ -4,10 +4,10 @@ import {ModuleApiProps} from './types';
 export function useGenericModuleApi<T = any, C = Partial<T>, E = Partial<T>>(props: ModuleApiProps) {
   const getByIdServive = useApi<T>('GET', '');
   const deleteItemService = useApi('DELETE', '');
-  const createService = useApi('POST', `/${props.ms}/api/${props.module}/create`);
-  const editService = useApi('PUT', `/${props.ms}/api/${props.module}/edit`);
-  const listService = useApi<T[]>('GET', `/${props.ms}/api/${props.module}/list`);
-  const listWithoutLoaderService = useApi<T[]>('GET', `/${props.ms}/api/${props.module}/list`, {setLoading: false});
+  const createService = useApi('POST', `/api/${props.module}/create`);
+  const editService = useApi('PUT', `/api/${props.module}/edit`);
+  const listService = useApi<T[]>('GET', `/api/${props.module}/list`);
+  const listWithoutLoaderService = useApi<T[]>('GET', `/api/${props.module}/list, {setLoading: false}`);
 
   async function create(params: C, onSuccess?: () => void) {
     return createService.fetch({
@@ -18,7 +18,7 @@ export function useGenericModuleApi<T = any, C = Partial<T>, E = Partial<T>>(pro
 
   async function getById(id: number | string) {
     return getByIdServive.fetch({
-      dynamicRoute: `/${props.ms}/api/${props.module}/getById/${id}`,
+      dynamicRoute: `/api/${props.module}/getById/${id}`,
     });
   }
 
@@ -31,7 +31,7 @@ export function useGenericModuleApi<T = any, C = Partial<T>, E = Partial<T>>(pro
 
   async function deleteItem(id: number | string, onSuccess?: () => void) {
     return deleteItemService.fetch({
-      dynamicRoute: `/${props.ms}/api/${props.module}/delete/${id}`,
+      dynamicRoute: `/api/${props.module}/delete/${id}`,
       dynamicOnSuccess: onSuccess,
     });
   }

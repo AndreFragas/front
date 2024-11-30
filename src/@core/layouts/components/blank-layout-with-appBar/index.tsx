@@ -5,7 +5,7 @@ import {styled, useTheme} from '@mui/material/styles';
 import Image from 'next/image';
 import Link from 'next/link';
 import {useSettings} from 'src/@core/hooks/useSettings';
-import logo from 'public/images/icone-albion.png';
+import logo from 'public/images/icone-logiquiz.png';
 import {getLocalStorage} from 'src/@prismafive/storage-controler';
 import themeConfig from 'src/configs/themeConfig';
 

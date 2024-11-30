@@ -16,7 +16,7 @@ class CustomDocument extends Document {
           />
           <title>Logiquiz</title>
           <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
-          <link rel="shortcut icon" href="/images/icone-albion.png" />
+          <link rel="shortcut icon" href="/images/icone-logiquiz.png" />
         </Head>
         <body>
           <Main />

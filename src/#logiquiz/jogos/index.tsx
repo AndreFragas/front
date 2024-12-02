@@ -4,25 +4,25 @@ import {Box, Button, Card, CardContent, CardHeader, InputAdornment, TextField} f
 import {useEffect, useState} from 'react';
 import {DefaultTable} from 'src/@prismafive/components/tables/default-table';
 import {removerAcentos} from 'src/@prismafive/helper/remover-acento';
+import {useNavigate} from 'src/@prismafive/hooks/use-navigate';
 import {useTranslate} from 'src/@prismafive/hooks/use-translate';
 import {AbilityContext} from 'src/layouts/components/acl/Can';
-import {usePerguntasModuleApi} from './api';
-import {usePerguntasTableConfig} from './config';
-import {IPergunta} from './types';
-import { useNavigate } from 'src/@prismafive/hooks/use-navigate';
+import {useJogosModuleApi} from './api';
+import {useJogosTableConfig} from './config';
+import {IJogo} from './types';
 
-export function PerguntasListScreen() {
-  const [perguntas, setPerguntas] = useState<IPergunta[]>([]);
+export function JogosListScreen() {
+  const [jogos, setJogos] = useState<IJogo[]>([]);
   const [search, setSearch] = useState('');
   const {translate} = useTranslate();
-  const config = usePerguntasTableConfig();
+  const config = useJogosTableConfig();
   const abilities = useAbility(AbilityContext);
-  const api = usePerguntasModuleApi();
+  const api = useJogosModuleApi();
   const navigate = useNavigate();
 
   async function init() {
-    const perguntas = await api.list();
-    if (perguntas) setPerguntas(perguntas);
+    const jogos = await api.list();
+    if (jogos) setJogos(jogos);
   }
 
   useEffect(() => {
@@ -42,10 +42,10 @@ export function PerguntasListScreen() {
           marginTop: 5,
         }}
       >
-        <CardHeader title={'Perguntas'} />
+        <CardHeader title={'Jogos'} />
 
-        <Can I={'create'} a={'Cadastros.Perguntas'} ability={abilities}>
-          <Button variant="contained" onClick={() => navigate.navigate('perguntas/create')}>
+        <Can I={'create'} a={'Cadastros.Jogos'} ability={abilities}>
+          <Button variant="contained" onClick={() => navigate.navigate('jogos/create')}>
             Incluir
           </Button>
         </Can>
@@ -68,9 +68,9 @@ export function PerguntasListScreen() {
         />
         <DefaultTable
           columnDefinition={config.generateConfig()}
-          data={perguntas.filter((pergunta) => {
+          data={jogos.filter((jogos) => {
             const cleanSearch = removerAcentos(search.toLowerCase());
-            const valor1 = removerAcentos(pergunta.texto.toLowerCase());
+            const valor1 = removerAcentos(jogos.descricao.toLowerCase());
             return valor1.includes(cleanSearch);
           })}
           getRowId={(value) => value.id}

@@ -1,7 +1,9 @@
 import {PerguntasScreen} from 'src/#logiquiz/perguntas/screen';
+import { getUrlParams } from 'src/@prismafive/helper/get-url-parameters';
 
 const EditPerguntas = () => {
-  return <PerguntasScreen type='edit' title='Editar Pergunta'/>;
+  const {id} = getUrlParams<{id: string}>(window);
+  return <PerguntasScreen type='edit' title='Editar Pergunta' id={id}/>;
 };
 
 EditPerguntas.acl = {

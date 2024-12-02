@@ -1,7 +1,7 @@
-import {JogosScreen} from 'src/#logiquiz/jogos/screen';
+import {JogosStep1Screen} from 'src/#logiquiz/jogos/pages/jogos-step-1';
 
 const EditJogos = () => {
-  return <JogosScreen type="edit" title='Editar Jogo' />;
+  return <JogosStep1Screen type="edit" title="Editar Jogo" />;
 };
 
 EditJogos.acl = {

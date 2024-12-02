@@ -1,11 +1,11 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import {Switch} from '@mui/material';
 import {GridActionsCellItem, GridCellParams} from '@mui/x-data-grid-pro';
+import {GridTextField} from 'src/@prismafive/components/form-fields-with-grid/grid-text-field';
 import {TextField} from 'src/@prismafive/components/form-fields/text-field';
 import {useGenericTableActions} from 'src/@prismafive/generics/table-actions';
 import {usePerguntasModuleApi} from './api';
 import {IAlternativas} from './types';
-import { GridTextField } from 'src/@prismafive/components/form-fields-with-grid/grid-text-field';
 
 export function usePerguntasTableConfig() {
   const {actions} = useGenericTableActions({
@@ -34,8 +34,9 @@ export function usePerguntasTableConfig() {
     deleteFunction: (id: number) => void,
     editCorreta: (id: number, value: any) => void,
     editTexto: (id: number, value: string) => void,
+    type: string
   ) {
-    return [
+    const columns = [
       {
         field: 'id',
         headerName: 'Número',
@@ -52,6 +53,7 @@ export function usePerguntasTableConfig() {
             value={params.row.texto}
             inputVariant={'standard'}
             onChange={(value) => editTexto(params.row.id, value)}
+            disabled={type === 'details'}
           />
         ),
       },
@@ -62,7 +64,11 @@ export function usePerguntasTableConfig() {
         sortable: false,
         align: 'center',
         renderCell: (params: GridCellParams<IAlternativas>) => (
-          <Switch checked={params.row.correta} onChange={(e) => editCorreta(params.row.id, e.target.checked)} />
+          <Switch
+            checked={params.row.correta}
+            onChange={(e) => editCorreta(params.row.id, e.target.checked)}
+            disabled={type === 'details'}
+          />
         ),
       },
       {
@@ -80,6 +86,8 @@ export function usePerguntasTableConfig() {
         ],
       },
     ];
+
+    return type === 'details' ? columns.filter((column) => column.field !== 'actions') : columns;
   }
 
   return {

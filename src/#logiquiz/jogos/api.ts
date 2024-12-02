@@ -5,6 +5,6 @@ export function useJogosModuleApi() {
   const genericApi = useGenericModuleApi<IJogo>({ ms: '', module: 'jogos'});
 
   return {
-    genericApi,
+    ...genericApi,
   };
 }

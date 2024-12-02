@@ -9,4 +9,5 @@ export interface IAlternativas {
   id: number;
   texto: string;
   correta: boolean;
+  pergunta_id: number;
 }

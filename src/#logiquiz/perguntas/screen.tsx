@@ -27,13 +27,12 @@ export function PerguntasScreen(props: FormScreenProps) {
   const toast = useToast();
   const config = usePerguntasTableConfig();
 
-  console.log('Alternativas', alternativas);
-
   useEffect(() => {
     async function init() {
       if (props.id) {
         let pergunta = await api.getById(props.id);
         reset(pergunta as any);
+        setAlternativas({values: pergunta.alternativas});
       }
     }
     init();
@@ -63,7 +62,7 @@ export function PerguntasScreen(props: FormScreenProps) {
         break;
       }
       case 'edit': {
-        await api.edit(newData, () => {
+        await api.edit({...newData, alternativas: alternativas.values}, () => {
           goBack();
           toast.showSuccessToast('global.success.edit');
         });
@@ -86,6 +85,7 @@ export function PerguntasScreen(props: FormScreenProps) {
           id: prevState.values.length > 0 ? Math.max(...prevState.values.map((item) => item.id || 0)) + 1 : 1,
           texto: '',
           correta: false,
+          pergunta_id: props.type === 'edit' && props.id ? parseInt(props.id.toString()) : undefined,
         } as Partial<IAlternativas>,
       ],
     }));
@@ -139,16 +139,18 @@ export function PerguntasScreen(props: FormScreenProps) {
           />
         </Grid>
         <Spacer label="Alternativas" marginTop={5} marginBottom={5} />
-        <Grid container spacing={2} marginTop={5} marginLeft={1}>
-          <Button variant="contained" onClick={adicionarAlternativa}>
-            Adicionar Alternativa
-          </Button>
-        </Grid>
+        {props.type !== 'details' && (
+          <Grid container spacing={2} marginTop={5} marginLeft={1}>
+            <Button variant="contained" onClick={adicionarAlternativa}>
+              Adicionar Alternativa
+            </Button>
+          </Grid>
+        )}
         <Grid item xs={12} sm={12} marginTop={5}>
           <DefaultTable
             tableName="AlternativasCreate"
             data={alternativas?.values || []}
-            columnDefinition={config.generateConfigAlternativas(deleteAlternativa, editCorreta, editTexto)}
+            columnDefinition={config.generateConfigAlternativas(deleteAlternativa, editCorreta, editTexto, props.type)}
             editMode="row"
             viewHeight="450px"
           />

@@ -1,31 +1,26 @@
-import {Can, useAbility} from '@casl/react';
 import {Icon} from '@iconify/react';
-import {Box, Button, Card, CardContent, CardHeader, InputAdornment, TextField} from '@mui/material';
+import {Box, Card, CardContent, CardHeader, InputAdornment, TextField} from '@mui/material';
 import {useEffect, useState} from 'react';
 import {DefaultTable} from 'src/@prismafive/components/tables/default-table';
 import {removerAcentos} from 'src/@prismafive/helper/remover-acento';
 import {useTranslate} from 'src/@prismafive/hooks/use-translate';
-import {AbilityContext} from 'src/layouts/components/acl/Can';
-import {usePerguntasModuleApi} from './api';
-import {usePerguntasTableConfig} from './config';
-import {IPergunta} from './types';
-import { useNavigate } from 'src/@prismafive/hooks/use-navigate';
+import {useAlunosModuleApi} from './api';
+import {useAlunosTableConfig} from './config';
+import {IAluno} from './types';
 
-export function PerguntasListScreen() {
-  const [perguntas, setPerguntas] = useState<IPergunta[]>([]);
+export function AlunosListScreen() {
+  const [alunos, setAlunos] = useState<IAluno[]>([]);
   const [search, setSearch] = useState('');
   const {translate} = useTranslate();
-  const config = usePerguntasTableConfig();
-  const abilities = useAbility(AbilityContext);
-  const api = usePerguntasModuleApi();
-  const navigate = useNavigate();
+  const config = useAlunosTableConfig();
+  const api = useAlunosModuleApi();
+
+  async function init() {
+    const alunos = await api.list();
+    if (alunos) setAlunos(alunos);
+  }
 
   useEffect(() => {
-    async function init() {
-      const perguntas = await api.list();
-      if (perguntas) setPerguntas(perguntas);
-    }
-
     init();
   }, []);
 
@@ -42,13 +37,7 @@ export function PerguntasListScreen() {
           marginTop: 5,
         }}
       >
-        <CardHeader title={'Perguntas'} />
-
-        <Can I={'create'} a={'Cadastros.Perguntas'} ability={abilities}>
-          <Button variant="contained" onClick={() => navigate.navigate('perguntas/create')}>
-            Incluir
-          </Button>
-        </Can>
+        <CardHeader title={'Alunos'} />
       </Box>
       <CardContent>
         <TextField
@@ -68,9 +57,9 @@ export function PerguntasListScreen() {
         />
         <DefaultTable
           columnDefinition={config.generateConfig()}
-          data={perguntas.filter((pergunta) => {
+          data={alunos.filter((alunos) => {
             const cleanSearch = removerAcentos(search.toLowerCase());
-            const valor1 = removerAcentos(pergunta.texto.toLowerCase());
+            const valor1 = removerAcentos(alunos.nome.toLowerCase());
             return valor1.includes(cleanSearch);
           })}
           getRowId={(value) => value.id}

@@ -1,31 +1,31 @@
-import {Can, useAbility} from '@casl/react';
+import {useAbility} from '@casl/react';
 import {Icon} from '@iconify/react';
-import {Box, Button, Card, CardContent, CardHeader, InputAdornment, TextField} from '@mui/material';
+import {Box, Card, CardContent, CardHeader, InputAdornment, TextField} from '@mui/material';
 import {useEffect, useState} from 'react';
 import {DefaultTable} from 'src/@prismafive/components/tables/default-table';
 import {removerAcentos} from 'src/@prismafive/helper/remover-acento';
+import {useNavigate} from 'src/@prismafive/hooks/use-navigate';
 import {useTranslate} from 'src/@prismafive/hooks/use-translate';
 import {AbilityContext} from 'src/layouts/components/acl/Can';
-import {usePerguntasModuleApi} from './api';
-import {usePerguntasTableConfig} from './config';
-import {IPergunta} from './types';
-import { useNavigate } from 'src/@prismafive/hooks/use-navigate';
+import {useJogosModuleApi} from '../jogos/api';
+import {IJogo} from '../jogos/types';
+import {useJogarJogosTableConfig} from './config';
 
-export function PerguntasListScreen() {
-  const [perguntas, setPerguntas] = useState<IPergunta[]>([]);
+export function JogarJogosListScreen() {
+  const [jogos, setJogos] = useState<IJogo[]>([]);
   const [search, setSearch] = useState('');
   const {translate} = useTranslate();
-  const config = usePerguntasTableConfig();
+  const config = useJogarJogosTableConfig();
   const abilities = useAbility(AbilityContext);
-  const api = usePerguntasModuleApi();
+  const jogosApi = useJogosModuleApi();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function init() {
-      const perguntas = await api.list();
-      if (perguntas) setPerguntas(perguntas);
-    }
+  async function init() {
+    const jogos = await jogosApi.list();
+    if (jogos) setJogos(jogos);
+  }
 
+  useEffect(() => {
     init();
   }, []);
 
@@ -42,13 +42,7 @@ export function PerguntasListScreen() {
           marginTop: 5,
         }}
       >
-        <CardHeader title={'Perguntas'} />
-
-        <Can I={'create'} a={'Cadastros.Perguntas'} ability={abilities}>
-          <Button variant="contained" onClick={() => navigate.navigate('perguntas/create')}>
-            Incluir
-          </Button>
-        </Can>
+        <CardHeader title={'Jogos'} />
       </Box>
       <CardContent>
         <TextField
@@ -68,9 +62,9 @@ export function PerguntasListScreen() {
         />
         <DefaultTable
           columnDefinition={config.generateConfig()}
-          data={perguntas.filter((pergunta) => {
+          data={jogos.filter((jogos) => {
             const cleanSearch = removerAcentos(search.toLowerCase());
-            const valor1 = removerAcentos(pergunta.texto.toLowerCase());
+            const valor1 = removerAcentos(jogos.nome.toLowerCase());
             return valor1.includes(cleanSearch);
           })}
           getRowId={(value) => value.id}

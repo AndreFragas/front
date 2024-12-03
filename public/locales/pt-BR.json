@@ -829,12 +829,14 @@
       "Configuracoes": "Configurações",
       "Parametro": "Parâmetros",
       "Jogos": "Jogos",
-      "Perguntas": "Perguntas"
+      "Perguntas": "Perguntas",
+      "Alunos": "Alunos"
     },
     "modulo": {
       "Cadastros": "Cadastros",
       "Configuracoes": "Configurações",
-      "Relatorios": "Relatórios"
+      "Relatorios": "Relatórios",
+      "Jogo": "Jogo"
     }
   },
   "farmacopeia": {

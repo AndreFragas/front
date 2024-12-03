@@ -58,6 +58,7 @@ export function PerguntasScreen(props: FormScreenProps) {
         await api.create({...newData, alternativas: alternativas.values}, () => {
           toast.showSuccessToast('global.success.register');
           reset();
+          setAlternativas({values: []});
         });
         break;
       }

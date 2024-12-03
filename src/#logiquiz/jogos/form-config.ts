@@ -1,7 +1,15 @@
 import * as yup from 'yup';
+import {IPergunta} from '../perguntas/types';
 
 const defaultValues = {
+  nome: '',
   descricao: '',
+  dificuldade: 1,
+  professor_id: undefined,
+  perguntas: [] as IPergunta[],
+  fase1: [] as number[],
+  fase2: [] as number[],
+  fase3: [] as number[]
 };
 
 export function useJogosFormConfig() {

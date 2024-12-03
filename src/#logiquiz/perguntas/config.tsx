@@ -1,11 +1,11 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import {Switch} from '@mui/material';
-import {GridActionsCellItem, GridCellParams} from '@mui/x-data-grid-pro';
-import {GridTextField} from 'src/@prismafive/components/form-fields-with-grid/grid-text-field';
+import {GridActionsCellItem, GridCellParams, GridColDef} from '@mui/x-data-grid-pro';
+import CustomChip from 'src/@core/components/mui/chip';
 import {TextField} from 'src/@prismafive/components/form-fields/text-field';
 import {useGenericTableActions} from 'src/@prismafive/generics/table-actions';
 import {usePerguntasModuleApi} from './api';
-import {IAlternativas} from './types';
+import {IAlternativas, IPergunta} from './types';
 
 export function usePerguntasTableConfig() {
   const {actions} = useGenericTableActions({
@@ -14,7 +14,28 @@ export function usePerguntasTableConfig() {
     permission: 'Cadastros.Perguntas',
   });
 
-  function generateConfig() {
+  function getDificuldadeComponent(status: number) {
+    if (typeof status !== 'number') return <></>;
+    const statusSelector = [
+      {},
+      {color: 'success', label: 'Fácil'},
+      {color: 'info', label: 'Médio'},
+      {color: 'error', label: 'Difícil'},
+    ];
+
+    return (
+      <CustomChip
+        rounded
+        size="small"
+        skin="light"
+        color={statusSelector[status].color as any}
+        label={statusSelector[status].label}
+        sx={{'& .MuiChip-label': {textTransform: 'capitalize'}}}
+      />
+    );
+  }
+
+  function generateConfig(): GridColDef<IPergunta>[] {
     return [
       {
         field: 'texto',
@@ -25,6 +46,7 @@ export function usePerguntasTableConfig() {
         field: 'dificuldade',
         headerName: `Dificuldade`,
         flex: 0.2,
+        renderCell: (params: GridCellParams) => getDificuldadeComponent(params.row.dificuldade),
       },
       actions,
     ];
@@ -54,6 +76,7 @@ export function usePerguntasTableConfig() {
             inputVariant={'standard'}
             onChange={(value) => editTexto(params.row.id, value)}
             disabled={type === 'details'}
+            inputType="text"
           />
         ),
       },

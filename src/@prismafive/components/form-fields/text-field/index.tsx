@@ -1,17 +1,17 @@
 import TextFieldMaterial from '@mui/material/TextField';
-import {isNaN} from 'lodash';
-import {useCallback, useEffect, useState} from 'react';
-import {Controller, useForm} from 'react-hook-form';
+import { isNaN } from 'lodash';
+import { useCallback, useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
-import {cleanFormatInfinityDecimal, formatInfinityDecimal, formatMoney} from 'src/@prismafive/helper/formatters';
-import {useTranslate} from 'src/@prismafive/hooks/use-translate';
-import {getLocalStorage} from 'src/@prismafive/storage-controler';
-import {TextFieldProps} from './types';
+import { cleanFormatInfinityDecimal, formatInfinityDecimal, formatMoney } from 'src/@prismafive/helper/formatters';
+import { useTranslate } from 'src/@prismafive/hooks/use-translate';
+import { getLocalStorage } from 'src/@prismafive/storage-controler';
+import { TextFieldProps } from './types';
 
 export function TextField(props: TextFieldProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [isNegative, setIsNegative] = useState(false);
-  const {translate} = useTranslate();
+  const { translate } = useTranslate();
   const currency = getLocalStorage(window, 'currency') ?? 'R$';
 
   function fillZerosLeft(str: string, size: number) {
@@ -41,8 +41,8 @@ export function TextField(props: TextFieldProps) {
     };
   }, [handleKeyUp]);
 
-  const maskToCurrency = ({nextState}: any) => {
-    const {value} = nextState || {};
+  const maskToCurrency = ({ nextState }: any) => {
+    const { value } = nextState || {};
     let amountFormatted = '';
     if (typeof value === 'number') amountFormatted.toString();
     amountFormatted = value?.replace?.(/\D/g, '');
@@ -82,8 +82,8 @@ export function TextField(props: TextFieldProps) {
     return nextState;
   };
 
-  const maskToCurrency4digits = ({nextState}: any) => {
-    const {value} = nextState || {};
+  const maskToCurrency4digits = ({ nextState }: any) => {
+    const { value } = nextState || {};
     let amountFormatted = '';
     if (typeof value === 'number') amountFormatted = value.toString();
     amountFormatted = value?.replace?.(/\D/g, '');
@@ -140,9 +140,9 @@ export function TextField(props: TextFieldProps) {
     return value;
   }
 
-  const {control, setValue} = useForm({
+  const { control, setValue } = useForm({
     mode: 'onBlur',
-    defaultValues: {textField: props.value},
+    defaultValues: { textField: props.value },
   });
 
   useEffect(() => {
@@ -163,7 +163,7 @@ export function TextField(props: TextFieldProps) {
     <Controller
       name={'textField'}
       control={control}
-      render={({field: {value, onChange, onBlur}}) => (
+      render={({ field: { value, onChange, onBlur } }) => (
         <InputMask
           value={handleValue(value)}
           beforeMaskedStateChange={
@@ -222,11 +222,11 @@ export function TextField(props: TextFieldProps) {
             label={props.label ? translate(props.label) : undefined}
             error={typeof props.error === 'string' && props.error !== ''}
             helperText={<>{translate(props.error ?? '')}</>}
-            inputProps={{maxLength: props.maxLength}}
-            sx={props.sx}
-            className={props.className}
-            InputProps={{
-              ...(props.percentAdornment && {endAdornment: <>%</>}),
+            inputProps={{ maxLength: props.maxLength }}
+            onKeyDown={(event: React.KeyboardEvent) => {
+              if (event.key === ' ') {
+                event.stopPropagation(); // Permite o espaço
+              }
             }}
           />
         </InputMask>

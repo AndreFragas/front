@@ -1,4 +1,4 @@
-import {JogosStep1Screen} from 'src/#logiquiz/jogos/pages/jogos-step-1';
+import {JogosStep1Screen} from 'src/#logiquiz/jogos/pages/jogos-step';
 
 const CreateJogos = () => {
   return <JogosStep1Screen type="create" title="Incluir Jogo" />;

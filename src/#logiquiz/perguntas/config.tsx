@@ -12,7 +12,6 @@ export function usePerguntasTableConfig() {
     api: usePerguntasModuleApi(),
     route: '/cadastros/perguntas',
     permission: 'Cadastros.Perguntas', 
-    excludeActions: ['delete']
   });
 
   function getDificuldadeComponent(status: number) {

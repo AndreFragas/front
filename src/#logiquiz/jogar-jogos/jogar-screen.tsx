@@ -12,6 +12,7 @@ import {IJogo} from '../jogos/types';
 import {useJogarJogosModuleApi} from './api';
 import {FasePerguntas} from './components/controlador-perguntas';
 import {JogarJogosTimeline} from './components/jogar-jogos-time-line';
+import {Modalresultado} from './components/modal-resultado';
 import {JogarJogosFormType, useJogarJogosFormConfig} from './form-config';
 import {IJogarJogo} from './types';
 
@@ -23,6 +24,7 @@ export function JogarScreen(props: FormScreenProps) {
     fase2: [],
     fase3: [],
   });
+  const [showModalResult, setShowModalResult] = useState<boolean>(false);
   const {schema, defaultValues} = useJogarJogosFormConfig();
   const {goBack} = useNavigate();
   const jogosApi = useJogosModuleApi();
@@ -30,6 +32,8 @@ export function JogarScreen(props: FormScreenProps) {
   const currentUser = getLocalStorage(window, 'userData');
   const fases = [perguntasFases.fase1, perguntasFases.fase2, perguntasFases.fase3];
   const [respostas, setRespostas] = useState<{pergunta_id: number; alternativa_id: number; fase_id: number}[]>([]);
+  const [acertos, setAcertos] = useState<number>(0);
+  const [totalPerguntas, setTotalPerguntas] = useState<number>(0);
 
   const {
     control,
@@ -62,8 +66,7 @@ export function JogarScreen(props: FormScreenProps) {
     init();
   }, []);
 
-  async function onSubmit(data: JogarJogosFormType) {
-  }
+  async function onSubmit(data: JogarJogosFormType) {}
 
   function handleCompleteFase(respostasFase: {pergunta_id: number; alternativa_id: number}[]) {
     const respostasComFase = respostasFase.map((resposta) => ({
@@ -82,8 +85,11 @@ export function JogarScreen(props: FormScreenProps) {
             respostas: novasRespostas,
           };
 
+          setAcertos(calculaAcertos(novasRespostas.map((x) => x.alternativa_id)));
+          setTotalPerguntas(perguntasFases.fase1.length + perguntasFases.fase2.length + perguntasFases.fase3.length)
+
           jogarJogosApi.salvarRespostas(jogoData, () => {
-            goBack();
+            setShowModalResult(true);
           });
         })();
       }
@@ -93,6 +99,28 @@ export function JogarScreen(props: FormScreenProps) {
     if (step !== 2) {
       setStep(step + 1);
     }
+  }
+
+  function onCloseModal() {
+    setShowModalResult(false);
+    goBack();
+  }
+
+  function calculaAcertos(alternativas_ids: number[]) {
+    let acertos = 0;
+    for (let alternativa_id of alternativas_ids) {
+      let procuraFase1 = perguntasFases.fase1.find((x) =>
+        x.alternativas.find((y) => y.id === alternativa_id && y.correta)
+      );
+      let procuraFase2 = perguntasFases.fase2.find((x) =>
+        x.alternativas.find((y) => y.id === alternativa_id && y.correta)
+      );
+      let procuraFase3 = perguntasFases.fase3.find((x) =>
+        x.alternativas.find((y) => y.id === alternativa_id && y.correta)
+      );
+      if (procuraFase1 || procuraFase2 || procuraFase3) acertos += 1;
+    }
+    return acertos;
   }
 
   return (
@@ -109,6 +137,7 @@ export function JogarScreen(props: FormScreenProps) {
           )}
         </Grid>
       </form>
+      <Modalresultado onClose={() => onCloseModal()} show={showModalResult} acertos={acertos} total={totalPerguntas} />
     </FormCard>
   );
 }

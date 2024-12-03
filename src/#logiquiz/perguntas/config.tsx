@@ -11,7 +11,8 @@ export function usePerguntasTableConfig() {
   const {actions} = useGenericTableActions({
     api: usePerguntasModuleApi(),
     route: '/cadastros/perguntas',
-    permission: 'Cadastros.Perguntas',
+    permission: 'Cadastros.Perguntas', 
+    excludeActions: ['delete']
   });
 
   function getDificuldadeComponent(status: number) {

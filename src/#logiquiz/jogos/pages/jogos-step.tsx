@@ -97,6 +97,7 @@ export function JogosStep1Screen(props: FormScreenProps) {
       newData.fase3 = perguntasFase3.map((x) => x.id);
       delete newData.perguntas;
       newData.professor_id = currentUser.id;
+      newData.dificuldade = parseInt(newData.dificuldade?.toString() ?? '');
 
       switch (props.type) {
         case 'create': {

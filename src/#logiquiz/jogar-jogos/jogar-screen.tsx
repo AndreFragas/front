@@ -63,14 +63,6 @@ export function JogarScreen(props: FormScreenProps) {
   }, []);
 
   async function onSubmit(data: JogarJogosFormType) {
-    // const jogoData: IJogarJogo = {
-    //   usuario_id: currentUser.id,
-    //   jogo_id: jogo?.id,
-    //   respostas: respostas,
-    // };
-    // await jogarJogosApi.salvarRespostas(jogoData, () => {
-    //   goBack();
-    // });
   }
 
   function handleCompleteFase(respostasFase: {pergunta_id: number; alternativa_id: number}[]) {
